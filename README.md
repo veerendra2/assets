@@ -1,8 +1,8 @@
 # Assets
 
-🎨 A curated collection of 🖼️ Background Wallpapers 🌟 Icons
+🎨 A curated collection of 🖼️ background wallpapers and 🌟 icons
 
-✨ Tailored for my [Homepage](https://github.com/gethomepage/homepage) and [Homer](https://github.com/bastienwirtz/homer) Dashboards, bringing a touch of personalization and style! 🚀
+✨ Tailored for my [Homepage](https://github.com/gethomepage/homepage) and [Homer](https://github.com/bastienwirtz/homer) Dashboards.
 
 ## Example
 
@@ -21,7 +21,7 @@ services:
       - sh
       - -c
       - |
-        rm -rf /app/* /app/.* || true &&
+        rm -rf /app/* /app/.* &&
         git clone --depth 1 https://github.com/veerendra2/assets.git /app
     volumes:
       - homepage_assets:/app
