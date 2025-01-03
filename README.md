@@ -1,8 +1,6 @@
 # Assets
 
-🎨 A curated collection of 🖼️ background wallpapers and 🌟 icons
-
-✨ Tailored for my [Homepage](https://github.com/gethomepage/homepage) and [Homer](https://github.com/bastienwirtz/homer) Dashboards.
+🎨 A curated collection of 🖼️ background wallpapers, 🌟 icons and 🔲 grafana dashboards.
 
 ## Example
 
@@ -37,7 +35,7 @@ services:
       - homepage_assets:/app/public
 ```
 
-See, assets are mounted into homepage
+Assets are mounted into homepage
 
 ```bash
 $ docker exec -it  homepage ls public
