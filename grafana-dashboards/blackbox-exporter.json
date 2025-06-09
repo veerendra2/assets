@@ -21,7 +21,7 @@
             }
         ]
     },
-    "description": "Prometheus Blackbox Exporter Overview",
+    "description": "Blackbox Exporter Overview",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "gnetId": 7587,
@@ -1101,7 +1101,7 @@
         ]
     },
     "timezone": "",
-    "title": "Prometheus Blackbox Exporter",
+    "title": "Blackbox Exporter",
     "uid": "xtkCtBkiz",
     "version": 10,
     "weekStart": ""
