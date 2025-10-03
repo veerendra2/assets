@@ -2,6 +2,8 @@
 
 🎨 A curated collection of 🖼️ background wallpapers, 🌟 icons and 🔲 grafana dashboards.
 
+> https://dashboardicons.com/
+
 ## Example
 
 You can keep the assets locally on the server by cloning them into a Docker volume while deploying the homepage.
