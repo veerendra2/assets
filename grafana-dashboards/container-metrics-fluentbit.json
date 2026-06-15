@@ -5,8 +5,8 @@
     "name": "4b547e5b-d1db-4e6e-883c-45792478a9bf",
     "namespace": "default",
     "uid": "329a3ce5-4d0e-45e7-ae36-fa94c9fb8782",
-    "resourceVersion": "1781520614988984",
-    "generation": 10,
+    "resourceVersion": "1781521563209992",
+    "generation": 17,
     "creationTimestamp": "2026-06-15T10:16:05Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "3816127516643328"
@@ -16,7 +16,7 @@
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.2 (3fcdbc5a)",
       "grafana.app/updatedBy": "user:afp5ilpudtgxsf",
-      "grafana.app/updatedTimestamp": "2026-06-15T10:50:14Z"
+      "grafana.app/updatedTimestamp": "2026-06-15T11:06:03Z"
     }
   },
   "spec": {
@@ -68,7 +68,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name)(docker_container_mem_used)",
+                        "expr": "sum by (name)(docker_container_mem_used{job=\"$job\"})",
                         "format": "time_series",
                         "intervalFactor": 1,
                         "legendFormat": "{{ name }}",
@@ -196,7 +196,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(docker_container_mem_used)",
+                        "expr": "sum(docker_container_mem_used{job=\"$job\"})",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -282,7 +282,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(docker_container_cpu_used[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
+                        "expr": "sum(rate(docker_container_cpu_used{job=\"$job\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}))",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -368,7 +368,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "node_load1",
+                        "expr": "node_load1{job=\"$job\"}",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 2,
@@ -509,7 +509,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
+                        "expr": "scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}))",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 2,
@@ -609,7 +609,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name) (increase(docker_container_cpu_used[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{mode=\"user\"}) * 60)",
+                        "expr": "sum by (name) (increase(docker_container_cpu_used{job=\"$job\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}) * 60)",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -734,7 +734,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "scalar(count(docker_container_mem_used) > 0)",
+                        "expr": "scalar(count(docker_container_mem_used{job=\"$job\"}) > 0)",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 2,
@@ -858,7 +858,7 @@
             "spec": {
               "x": 3,
               "y": 0,
-              "width": 3,
+              "width": 4,
               "height": 4,
               "element": {
                 "kind": "ElementReference",
@@ -869,9 +869,9 @@
           {
             "kind": "GridLayoutItem",
             "spec": {
-              "x": 6,
+              "x": 7,
               "y": 0,
-              "width": 3,
+              "width": 2,
               "height": 4,
               "element": {
                 "kind": "ElementReference",
@@ -911,7 +911,7 @@
               "x": 0,
               "y": 4,
               "width": 24,
-              "height": 7,
+              "height": 8,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-8"
@@ -922,9 +922,9 @@
             "kind": "GridLayoutItem",
             "spec": {
               "x": 0,
-              "y": 11,
+              "y": 12,
               "width": 24,
-              "height": 7,
+              "height": 9,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-11"
@@ -976,8 +976,44 @@
           "options": [],
           "multi": false,
           "includeAll": false,
+          "label": "Datasource",
           "hide": "dontHide",
           "skipUrlSync": false,
+          "allowCustomValue": true
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "name": "job",
+          "current": {
+            "text": "hydrogen",
+            "value": "hydrogen"
+          },
+          "label": "Job",
+          "hide": "dontHide",
+          "refresh": "onDashboardLoad",
+          "skipUrlSync": false,
+          "query": {
+            "kind": "DataQuery",
+            "group": "victoriametrics-metrics-datasource",
+            "version": "v0",
+            "datasource": {
+              "name": "${datasource}"
+            },
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(docker_container_cpu_used,job)",
+              "refId": "VariableQueryEditor-VariableQuery"
+            }
+          },
+          "regex": "",
+          "regexApplyTo": "value",
+          "sort": "alphabeticalAsc",
+          "definition": "label_values(docker_container_cpu_used,job)",
+          "options": [],
+          "multi": false,
+          "includeAll": false,
           "allowCustomValue": true
         }
       }
