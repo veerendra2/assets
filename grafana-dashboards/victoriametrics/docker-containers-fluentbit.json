@@ -4,19 +4,19 @@
   "metadata": {
     "name": "4b547e5b-d1db-4e6e-883c-45792478a9bf",
     "namespace": "default",
-    "uid": "329a3ce5-4d0e-45e7-ae36-fa94c9fb8782",
-    "resourceVersion": "1781531175360994",
-    "generation": 26,
-    "creationTimestamp": "2026-06-15T10:16:05Z",
+    "uid": "7df7b174-d1cf-40d5-ae5f-0cfdee688866",
+    "resourceVersion": "1781554739142014",
+    "generation": 2,
+    "creationTimestamp": "2026-06-15T20:16:58Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3816127516643328"
+      "grafana.app/deprecatedInternalID": "3967344929009664"
     },
     "annotations": {
       "grafana.app/createdBy": "user:afp5ilpudtgxsf",
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.2 (3fcdbc5a)",
       "grafana.app/updatedBy": "user:afp5ilpudtgxsf",
-      "grafana.app/updatedTimestamp": "2026-06-15T13:46:15Z"
+      "grafana.app/updatedTimestamp": "2026-06-15T20:18:59Z"
     }
   },
   "spec": {
@@ -1041,14 +1041,14 @@
             },
             "spec": {
               "qryType": 1,
-              "query": "label_values(docker_container_cpu_used{instance=\"$instance\"},job)",
+              "query": "label_values(docker_container_cpu_used,job)",
               "refId": "VariableQueryEditor-VariableQuery"
             }
           },
           "regex": "",
           "regexApplyTo": "value",
           "sort": "alphabeticalAsc",
-          "definition": "label_values(docker_container_cpu_used{instance=\"$instance\"},job)",
+          "definition": "label_values(docker_container_cpu_used,job)",
           "options": [],
           "multi": false,
           "includeAll": false,
@@ -1076,14 +1076,14 @@
             },
             "spec": {
               "qryType": 1,
-              "query": "label_values(docker_container_cpu_used{job=\"$job\"},instance)",
+              "query": "label_values(docker_container_cpu_used,instance)",
               "refId": "VariableQueryEditor-VariableQuery"
             }
           },
           "regex": "",
           "regexApplyTo": "value",
           "sort": "alphabeticalAsc",
-          "definition": "label_values(docker_container_cpu_used{job=\"$job\"},instance)",
+          "definition": "label_values(docker_container_cpu_used,instance)",
           "options": [],
           "multi": false,
           "includeAll": false,
