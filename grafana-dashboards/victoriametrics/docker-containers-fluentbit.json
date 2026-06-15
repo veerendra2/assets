@@ -5,8 +5,8 @@
     "name": "4b547e5b-d1db-4e6e-883c-45792478a9bf",
     "namespace": "default",
     "uid": "329a3ce5-4d0e-45e7-ae36-fa94c9fb8782",
-    "resourceVersion": "1781521563209992",
-    "generation": 17,
+    "resourceVersion": "1781531175360994",
+    "generation": 26,
     "creationTimestamp": "2026-06-15T10:16:05Z",
     "labels": {
       "grafana.app/deprecatedInternalID": "3816127516643328"
@@ -16,7 +16,7 @@
       "grafana.app/folder": "",
       "grafana.app/saved-from-ui": "Grafana v13.0.2 (3fcdbc5a)",
       "grafana.app/updatedBy": "user:afp5ilpudtgxsf",
-      "grafana.app/updatedTimestamp": "2026-06-15T11:06:03Z"
+      "grafana.app/updatedTimestamp": "2026-06-15T13:46:15Z"
     }
   },
   "spec": {
@@ -68,7 +68,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name)(docker_container_mem_used{job=\"$job\"})",
+                        "expr": "sum by (name)(docker_container_mem_used{job=\"$job\", instance=\"$instance\"})",
                         "format": "time_series",
                         "intervalFactor": 1,
                         "legendFormat": "{{ name }}",
@@ -167,7 +167,32 @@
                     }
                   }
                 },
-                "overrides": []
+                "overrides": [
+                  {
+                    "__systemRef": "hideSeriesFrom",
+                    "matcher": {
+                      "id": "byNames",
+                      "options": {
+                        "mode": "exclude",
+                        "names": [
+                          "victoriametrics"
+                        ],
+                        "prefix": "All except:",
+                        "readOnly": true
+                      }
+                    },
+                    "properties": [
+                      {
+                        "id": "custom.hideFrom",
+                        "value": {
+                          "legend": false,
+                          "tooltip": true,
+                          "viz": true
+                        }
+                      }
+                    ]
+                  }
+                ]
               }
             }
           }
@@ -196,7 +221,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(docker_container_mem_used{job=\"$job\"})",
+                        "expr": "sum(docker_container_mem_used{job=\"$job\", instance=\"$instance\"})",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -282,7 +307,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(rate(docker_container_cpu_used{job=\"$job\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}))",
+                        "expr": "sum(rate(docker_container_cpu_used{job=\"$job\", instance=\"$instance\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", instance=\"$instance\", mode=\"user\"}))",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -368,7 +393,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "node_load1{job=\"$job\"}",
+                        "expr": "node_load1{job=\"$job\", instance=\"$instance\"}",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 2,
@@ -509,7 +534,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}))",
+                        "expr": "scalar(count(node_cpu_seconds_total{job=\"$job\", instance=\"$instance\", mode=\"user\"}))",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 2,
@@ -609,7 +634,7 @@
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name) (increase(docker_container_cpu_used{job=\"$job\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", mode=\"user\"}) * 60)",
+                        "expr": "sum by (name) (increase(docker_container_cpu_used{job=\"$job\", instance=\"$instance\"}[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{job=\"$job\", instance=\"$instance\", mode=\"user\"}) * 60)",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -934,7 +959,20 @@
         ]
       }
     },
-    "links": [],
+    "links": [
+      {
+        "title": "Fluent Bit Docker Metrics Docs",
+        "type": "link",
+        "icon": "external link",
+        "tooltip": "",
+        "url": "https://docs.fluentbit.io/manual/data-pipeline/inputs/docker-metrics",
+        "tags": [],
+        "asDropdown": true,
+        "targetBlank": false,
+        "includeVars": false,
+        "keepTime": false
+      }
+    ],
     "liveNow": false,
     "preload": false,
     "tags": [
@@ -944,7 +982,7 @@
       "timezone": "browser",
       "from": "now-1h",
       "to": "now",
-      "autoRefresh": "10s",
+      "autoRefresh": "",
       "autoRefreshIntervals": [
         "5s",
         "10s",
@@ -960,7 +998,7 @@
       "hideTimepicker": false,
       "fiscalYearStartMonth": 0
     },
-    "title": "Container Metrics (Fluent Bit)",
+    "title": "Docker Containers (Fluent Bit)",
     "variables": [
       {
         "kind": "DatasourceVariable",
@@ -1003,14 +1041,49 @@
             },
             "spec": {
               "qryType": 1,
-              "query": "label_values(docker_container_cpu_used,job)",
+              "query": "label_values(docker_container_cpu_used{instance=\"$instance\"},job)",
               "refId": "VariableQueryEditor-VariableQuery"
             }
           },
           "regex": "",
           "regexApplyTo": "value",
           "sort": "alphabeticalAsc",
-          "definition": "label_values(docker_container_cpu_used,job)",
+          "definition": "label_values(docker_container_cpu_used{instance=\"$instance\"},job)",
+          "options": [],
+          "multi": false,
+          "includeAll": false,
+          "allowCustomValue": true
+        }
+      },
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "name": "instance",
+          "current": {
+            "text": "fluent-bit:2021",
+            "value": "fluent-bit:2021"
+          },
+          "label": "Instance",
+          "hide": "dontHide",
+          "refresh": "onDashboardLoad",
+          "skipUrlSync": false,
+          "query": {
+            "kind": "DataQuery",
+            "group": "victoriametrics-metrics-datasource",
+            "version": "v0",
+            "datasource": {
+              "name": "${datasource}"
+            },
+            "spec": {
+              "qryType": 1,
+              "query": "label_values(docker_container_cpu_used{job=\"$job\"},instance)",
+              "refId": "VariableQueryEditor-VariableQuery"
+            }
+          },
+          "regex": "",
+          "regexApplyTo": "value",
+          "sort": "alphabeticalAsc",
+          "definition": "label_values(docker_container_cpu_used{job=\"$job\"},instance)",
           "options": [],
           "multi": false,
           "includeAll": false,
