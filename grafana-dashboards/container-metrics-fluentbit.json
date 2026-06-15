@@ -4,25 +4,19 @@
   "metadata": {
     "name": "4b547e5b-d1db-4e6e-883c-45792478a9bf",
     "namespace": "default",
-    "uid": "03710a39-a5e0-4919-b599-2bf6b8c8d986",
-    "resourceVersion": "1781386213484993",
-    "generation": 12,
-    "creationTimestamp": "2026-06-13T14:14:25Z",
+    "uid": "329a3ce5-4d0e-45e7-ae36-fa94c9fb8782",
+    "resourceVersion": "1781520614988984",
+    "generation": 10,
+    "creationTimestamp": "2026-06-15T10:16:05Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3151331323908096"
+      "grafana.app/deprecatedInternalID": "3816127516643328"
     },
     "annotations": {
-      "grafana.app/createdBy": "access-policy:service",
+      "grafana.app/createdBy": "user:afp5ilpudtgxsf",
       "grafana.app/folder": "",
-      "grafana.app/managedBy": "classic-file-provisioning",
-      "grafana.app/managerAllowsEdits": "true",
-      "grafana.app/managerId": "Prometheus",
       "grafana.app/saved-from-ui": "Grafana v13.0.2 (3fcdbc5a)",
-      "grafana.app/sourceChecksum": "fe4a55aa37bc224c424eab3681d6106a",
-      "grafana.app/sourcePath": "/etc/grafana/dashboards/docker_containers.json",
-      "grafana.app/sourceTimestamp": "1781360032000",
-      "grafana.app/updatedBy": "user:cfp0d31xuf6dcb",
-      "grafana.app/updatedTimestamp": "2026-06-13T21:30:13Z"
+      "grafana.app/updatedBy": "user:afp5ilpudtgxsf",
+      "grafana.app/updatedTimestamp": "2026-06-15T10:50:14Z"
     }
   },
   "spec": {
@@ -70,7 +64,7 @@
                       "group": "victoriametrics-metrics-datasource",
                       "version": "v0",
                       "datasource": {
-                        "name": "victoriametrics"
+                        "name": "${datasource}"
                       },
                       "spec": {
                         "editorMode": "code",
@@ -198,7 +192,7 @@
                       "group": "victoriametrics-metrics-datasource",
                       "version": "v0",
                       "datasource": {
-                        "name": "victoriametrics"
+                        "name": "${datasource}"
                       },
                       "spec": {
                         "editorMode": "code",
@@ -284,11 +278,11 @@
                       "group": "victoriametrics-metrics-datasource",
                       "version": "v0",
                       "datasource": {
-                        "name": "victoriametrics"
+                        "name": "${datasource}"
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum(increase(docker_container_cpu_used[1m]) / 1000000)\n/ scalar(count(node_cpu_seconds_total{mode=\"user\"}) * 60)",
+                        "expr": "sum(rate(docker_container_cpu_used[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -351,6 +345,247 @@
           }
         }
       },
+      "panel-14": {
+        "kind": "Panel",
+        "spec": {
+          "id": 14,
+          "title": "System Load",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "victoriametrics-metrics-datasource",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "node_load1",
+                        "format": "time_series",
+                        "interval": "",
+                        "intervalFactor": 2,
+                        "legendFormat": "load 1m",
+                        "metric": "node_load1",
+                        "range": true,
+                        "step": 2
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {}
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "timeseries",
+            "version": "13.0.2",
+            "spec": {
+              "options": {
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "none"
+                }
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "short",
+                  "min": 0,
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  },
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "bars",
+                    "fillOpacity": 100,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "linear",
+                    "lineWidth": 2,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "never",
+                    "showValues": false,
+                    "spanNulls": true,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  }
+                },
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "load 1m"
+                    },
+                    "properties": [
+                      {
+                        "id": "color",
+                        "value": {
+                          "fixedColor": "#BF1B00",
+                          "mode": "fixed"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "panel-15": {
+        "kind": "Panel",
+        "spec": {
+          "id": 15,
+          "title": "CPU Cores",
+          "description": "",
+          "links": [],
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "query": {
+                      "kind": "DataQuery",
+                      "group": "victoriametrics-metrics-datasource",
+                      "version": "v0",
+                      "datasource": {
+                        "name": "${datasource}"
+                      },
+                      "spec": {
+                        "editorMode": "code",
+                        "expr": "scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
+                        "format": "time_series",
+                        "interval": "",
+                        "intervalFactor": 2,
+                        "legendFormat": "__auto",
+                        "metric": "machine_cpu_cores",
+                        "range": true,
+                        "step": 20
+                      }
+                    },
+                    "refId": "A",
+                    "hidden": false
+                  }
+                }
+              ],
+              "transformations": [],
+              "queryOptions": {
+                "maxDataPoints": 100
+              }
+            }
+          },
+          "vizConfig": {
+            "kind": "VizConfig",
+            "group": "stat",
+            "version": "13.0.2",
+            "spec": {
+              "options": {
+                "colorMode": "none",
+                "graphMode": "none",
+                "justifyMode": "auto",
+                "orientation": "horizontal",
+                "percentChangeColorMode": "standard",
+                "reduceOptions": {
+                  "calcs": [
+                    "mean"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showPercentChange": false,
+                "textMode": "auto",
+                "wideLayout": true
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "unit": "none",
+                  "mappings": [
+                    {
+                      "type": "special",
+                      "options": {
+                        "match": "null",
+                        "result": {
+                          "text": "N/A"
+                        }
+                      }
+                    }
+                  ],
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "value": 0,
+                        "color": "green"
+                      },
+                      {
+                        "value": 80,
+                        "color": "red"
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              }
+            }
+          }
+        }
+      },
       "panel-8": {
         "kind": "Panel",
         "spec": {
@@ -370,11 +605,11 @@
                       "group": "victoriametrics-metrics-datasource",
                       "version": "v0",
                       "datasource": {
-                        "name": "victoriametrics"
+                        "name": "${datasource}"
                       },
                       "spec": {
                         "editorMode": "code",
-                        "expr": "sum by (name) (\n  increase(docker_container_cpu_used[1m]) / 1000000\n)\n/ scalar(count(node_cpu_seconds_total{mode=\"user\"}) * 60)",
+                        "expr": "sum by (name) (increase(docker_container_cpu_used[1m]) / 1000000) / scalar(count(node_cpu_seconds_total{mode=\"user\"}) * 60)",
                         "format": "time_series",
                         "legendFormat": "__auto",
                         "range": true
@@ -495,7 +730,7 @@
                       "group": "victoriametrics-metrics-datasource",
                       "version": "v0",
                       "datasource": {
-                        "name": "victoriametrics"
+                        "name": "${datasource}"
                       },
                       "spec": {
                         "editorMode": "code",
@@ -623,7 +858,7 @@
             "spec": {
               "x": 3,
               "y": 0,
-              "width": 4,
+              "width": 3,
               "height": 4,
               "element": {
                 "kind": "ElementReference",
@@ -634,13 +869,39 @@
           {
             "kind": "GridLayoutItem",
             "spec": {
-              "x": 7,
+              "x": 6,
+              "y": 0,
+              "width": 3,
+              "height": 4,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-15"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 9,
               "y": 0,
               "width": 7,
               "height": 4,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-9"
+              }
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "x": 16,
+              "y": 0,
+              "width": 8,
+              "height": 4,
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-14"
               }
             }
           },
