@@ -4,25 +4,18 @@
   "metadata": {
     "name": "PkPI4xGWz",
     "namespace": "default",
-    "uid": "4d8330f6-06e9-4db5-97fb-c4e4786e4b44",
-    "resourceVersion": "1781530406519016",
-    "generation": 7,
-    "creationTimestamp": "2026-06-14T22:41:22Z",
+    "uid": "35c76ad3-fc6a-4d37-a777-641cfda7c50b",
+    "resourceVersion": "1789220894579015",
+    "generation": 2,
+    "creationTimestamp": "2026-09-12T13:47:42Z",
     "labels": {
-      "grafana.app/deprecatedInternalID": "3641294263103488"
+      "grafana.app/deprecatedInternalID": "93103612215296"
     },
     "annotations": {
-      "grafana.app/createdBy": "access-policy:service",
-      "grafana.app/folder": "",
-      "grafana.app/managedBy": "classic-file-provisioning",
-      "grafana.app/managerAllowsEdits": "true",
-      "grafana.app/managerId": "Prometheus",
-      "grafana.app/saved-from-ui": "Grafana v13.0.2 (3fcdbc5a)",
-      "grafana.app/sourceChecksum": "359534625b3aa7c549efe68c19980404",
-      "grafana.app/sourcePath": "/etc/grafana/dashboards/smartmon.json",
-      "grafana.app/sourceTimestamp": "1781476828000",
-      "grafana.app/updatedBy": "user:afp5ilpudtgxsf",
-      "grafana.app/updatedTimestamp": "2026-06-15T13:33:26Z"
+      "grafana.app/createdBy": "user:afpb3xv4l6n7kc",
+      "grafana.app/saved-from-ui": "Grafana v13.2.1 (56cd3e9288)",
+      "grafana.app/updatedBy": "user:afpb3xv4l6n7kc",
+      "grafana.app/updatedTimestamp": "2026-09-12T13:48:14Z"
     }
   },
   "spec": {
@@ -73,13 +66,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(avg(smartmon_temperature_celsius_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }) by (instance, disk, name), \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 4,
-                        "legendFormat": "【{{instance}}】 {{disk}} {{name}}",
-                        "range": true
+                        "legendFormat": "【{{instance}}】 {{disk}} {{name}}"
                       }
                     },
                     "refId": "A",
@@ -94,14 +85,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "alertThreshold": true,
-                "annotations": {
-                  "clustering": -1,
-                  "multiLane": false
-                },
                 "legend": {
                   "calcs": [
                     "mean",
@@ -202,11 +189,9 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "sum(smartmon_device_active)",
                         "format": "time_series",
-                        "intervalFactor": 1,
-                        "range": true
+                        "intervalFactor": 1
                       }
                     },
                     "refId": "A",
@@ -223,7 +208,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "none",
@@ -301,7 +286,6 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_device_info{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^:]+).*\")",
                         "format": "table",
                         "instant": true,
@@ -376,7 +360,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "table",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "cellHeight": "sm",
@@ -550,7 +534,6 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(label_replace(smartmon_temperature_celsius_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\"), \"disk\", \"$1\", \"disk\", \"/dev/(.*)\")",
                         "format": "time_series",
                         "instant": false,
@@ -573,7 +556,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "gradient",
@@ -658,7 +641,6 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_spin_up_time_raw_value{ instance=~\"$instance\", disk=~\"$disk\"}, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "instant": false,
@@ -679,7 +661,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -761,13 +743,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_start_stop_count_raw_value { instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -782,7 +762,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "gradient",
@@ -1045,12 +1025,9 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "sum(smartmon_multi_zone_error_rate_raw_value{ instance=~\"$instance\", disk=~\"$disk\" })",
-                        "format": "time_series",
                         "interval": "",
-                        "legendFormat": "multi_zone_error_rate_raw_value",
-                        "range": true
+                        "legendFormat": "multi_zone_error_rate_raw_value"
                       }
                     },
                     "refId": "I",
@@ -1067,14 +1044,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "alertThreshold": true,
-                "annotations": {
-                  "clustering": -1,
-                  "multiLane": false
-                },
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
@@ -1175,7 +1148,6 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_power_on_hours_raw_value{ disk=~\"$disk\", instance=~\"$instance\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "instant": false,
@@ -1196,7 +1168,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "gradient",
@@ -1282,13 +1254,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_power_cycle_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\"}, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1303,7 +1273,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -1387,13 +1357,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace( smartmon_power_off_retract_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\"}, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1408,7 +1376,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -1493,13 +1461,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_load_cycle_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\"}, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1514,7 +1480,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -1593,13 +1559,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "sum(smartmon_device_smart_healthy{instance=~\"$instance\"})-sum(smartmon_device_smart_healthy{instance=~\"$instance\"})",
                         "format": "table",
                         "interval": "",
                         "intervalFactor": 2,
-                        "legendFormat": "",
-                        "range": true
+                        "legendFormat": ""
                       }
                     },
                     "refId": "A",
@@ -1616,7 +1580,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "stat",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "colorMode": "background",
@@ -1704,13 +1668,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_raw_read_error_rate_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1725,7 +1687,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -1810,13 +1772,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_udma_crc_error_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1831,7 +1791,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -1915,13 +1875,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_seek_error_rate_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -1936,7 +1894,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -2094,12 +2052,9 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "sum(smartmon_sas_write_uncorrected_errors_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" })",
-                        "format": "time_series",
                         "interval": "",
-                        "legendFormat": "sas_write_uncorrected_errors_count",
-                        "range": true
+                        "legendFormat": "sas_write_uncorrected_errors_count"
                       }
                     },
                     "refId": "B",
@@ -2116,14 +2071,10 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "alertThreshold": true,
-                "annotations": {
-                  "clustering": -1,
-                  "multiLane": false
-                },
                 "legend": {
                   "calcs": [],
                   "displayMode": "list",
@@ -2239,7 +2190,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -2317,13 +2268,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(smartmon_sas_non_medium_errors_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }, \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -2338,7 +2287,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -2416,13 +2365,11 @@
                         "name": "${datasource}"
                       },
                       "spec": {
-                        "editorMode": "code",
                         "expr": "label_replace(sum (smartmon_sas_read_uncorrected_errors_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" } + smartmon_sas_write_uncorrected_errors_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" } + smartmon_sas_verify_uncorrected_errors_count_raw_value{ instance=~\"$instance\", disk=~\"$disk\" }) by (instance, disk, name), \"instance\", \"$1\", \"instance\", \"([^.]+).*\")",
                         "format": "time_series",
                         "interval": "",
                         "intervalFactor": 1,
-                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】",
-                        "range": true
+                        "legendFormat": "{{name}} 【{{instance}} {{disk}}】"
                       }
                     },
                     "refId": "A",
@@ -2437,7 +2384,7 @@
           "vizConfig": {
             "kind": "VizConfig",
             "group": "bargauge",
-            "version": "13.0.2",
+            "version": "13.2.1",
             "spec": {
               "options": {
                 "displayMode": "lcd",
@@ -2822,7 +2769,7 @@
     "liveNow": false,
     "preload": false,
     "tags": [
-      "prometheus",
+      "victoriametrics",
       "node_exporter",
       "smartmon",
       "SPN"
@@ -2857,13 +2804,13 @@
           "refresh": "onDashboardLoad",
           "regex": "",
           "current": {
-            "text": "VictoriaMetrics",
-            "value": "victoriametrics"
+            "text": "",
+            "value": ""
           },
           "options": [],
           "multi": false,
           "includeAll": false,
-          "label": "Datasource",
+          "label": "VictoriaMetrics",
           "hide": "dontHide",
           "skipUrlSync": false,
           "allowCustomValue": true
@@ -2877,7 +2824,6 @@
             "text": "All",
             "value": "$__all"
           },
-          "label": "Instance",
           "hide": "dontHide",
           "refresh": "onDashboardLoad",
           "skipUrlSync": false,
@@ -2889,15 +2835,13 @@
               "name": "${datasource}"
             },
             "spec": {
-              "qryType": 1,
-              "query": "label_values(smartmon_device_info,instance)",
-              "refId": "VariableQueryEditor-VariableQuery"
+              "__legacyStringValue": "label_values(smartmon_smartctl_version, instance)"
             }
           },
           "regex": "",
           "regexApplyTo": "value",
           "sort": "alphabeticalAsc",
-          "definition": "label_values(smartmon_device_info,instance)",
+          "definition": "label_values(smartmon_smartctl_version, instance)",
           "options": [],
           "multi": true,
           "includeAll": true,
@@ -2912,7 +2856,6 @@
             "text": "All",
             "value": "$__all"
           },
-          "label": "Disk",
           "hide": "dontHide",
           "refresh": "onDashboardLoad",
           "skipUrlSync": false,
@@ -2924,15 +2867,13 @@
               "name": "${datasource}"
             },
             "spec": {
-              "qryType": 1,
-              "query": "label_values(smartmon_device_info,disk)",
-              "refId": "VariableQueryEditor-VariableQuery"
+              "__legacyStringValue": "label_values(smartmon_device_info, disk)"
             }
           },
           "regex": "",
           "regexApplyTo": "value",
           "sort": "alphabeticalAsc",
-          "definition": "label_values(smartmon_device_info,disk)",
+          "definition": "label_values(smartmon_device_info, disk)",
           "options": [],
           "multi": true,
           "includeAll": true,
